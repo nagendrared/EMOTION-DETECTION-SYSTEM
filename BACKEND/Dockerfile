@@ -4,8 +4,8 @@ FROM python:3.11.4-slim
 # Set working directory inside container
 WORKDIR /app
 
-# Copy requirements.txt from BACKEND folder
-COPY BACKEND/requirements.txt .
+# Copy requirements.txt
+COPY requirements.txt .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -17,5 +17,4 @@ COPY . .
 EXPOSE 5000
 
 # Command to run Flask app with gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
-
+CMD ["gunicorn", "-b", "0.0.0.0:$PORT", "app:app"]
